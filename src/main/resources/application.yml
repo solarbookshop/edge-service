@@ -9,3 +9,16 @@ spring:
     name: edge-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: catalog-service
+              uri: ${CATALOG_SERVICE_URL:http://localhost:9001}/books
+              predicates:
+                - Path=/books/**
+            - id: order-service
+              uri: ${ORDER_SERVICE_URL:http://localhost:9002}/orders
+              predicates:
+                - Path=/orders/**
