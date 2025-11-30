@@ -22,3 +22,10 @@ spring:
               uri: ${ORDER_SERVICE_URL:http://localhost:9002}/orders
               predicates:
                 - Path=/orders/**
+          httpclient:
+            connect-timeout: 2000
+            response-timeout: 5s
+            pool:
+              type: elastic
+              max-idle-time: 15s
+              max-life-time: 60s
