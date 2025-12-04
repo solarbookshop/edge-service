@@ -14,6 +14,13 @@ spring:
       server:
         webflux:
           default-filters:
+            - SaveSession
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter:
+                  replenishRate: 10
+                  burstCapacity: 20
+                  requestedTokens: 1
             - name: Retry
               args:
                 retries: 3
@@ -25,12 +32,6 @@ spring:
                   maxBackoff: 500ms
                   factor: 2
                   basedOnPreviousValue: false
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter:
-                  replenishRate: 10
-                  burstCapacity: 20
-                  requestedTokens: 1
           routes:
             - id: catalog-service
               uri: ${CATALOG_SERVICE_URL:http://localhost:9001}/books
@@ -62,6 +63,11 @@ spring:
       port: 6379
       connect-timeout: 2s
       timeout: 1s
+  session:
+    timeout: 10m
+    data:
+      redis:
+        namespace: solar:edge
 resilience4j:
   circuitbreaker:
     configs:
