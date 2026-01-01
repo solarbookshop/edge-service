@@ -80,6 +80,17 @@ spring:
     data:
       redis:
         namespace: solar:edge
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: edge-service
+            client-secret: solar-keycloak-secret
+            scope: openid
+        provider:
+            keycloak:
+                issuer-uri: http://localhost:8080/realms/SolarBookshop
 resilience4j:
   circuitbreaker:
     configs:
