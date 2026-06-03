@@ -5,13 +5,13 @@ An API gateway is a common pattern in distributed architectures that acts as a s
 interact with multiple backend services. It handles requests by routing them to the appropriate service, 
 aggregating responses, and performing various cross-cutting concerns such as security, monitoring, and resilience.
 
-Edge Service improves recilience of the system by configuring circuit breakers with 
+Edge Service improves resilience of the system by configuring circuit breakers with 
 [Spring Cloud Circuit Breaker](https://spring.io/projects/spring-cloud-circuitbreaker),
 defining rate limiters with [Spring Data Redis](https://spring.io/projects/spring-data-redis) Reactive, 
 and using retries and timeouts with Spring WebFlux. It also stores web session state using 
 [Spring Session](https://spring.io/projects/spring-session) Data Redis, a NoSQL in-memory data store.
 
-![solar-ingress.jpg](solar-ingress.jpg)
+![Kubernetes Cluster diagram](./kubernetes-cluster.svg)
 
 ## Useful Commands
 
