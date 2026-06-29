@@ -62,6 +62,10 @@ spring:
                 - name: CircuitBreaker
                   args:
                     name: orderCircuitBreaker
+            - id: spa-route
+              uri: ${SPA_URL:http://localhost:9004}
+              predicates:
+                - Path=/,/*.css,/*.js,/favicon.ico
           httpclient:
             connect-timeout: 2000
             response-timeout: 5s

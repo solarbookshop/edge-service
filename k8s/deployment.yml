@@ -32,3 +32,7 @@ spec:
               value: http://config-service
             - name: SPRING_DATA_REDIS_HOST
               value: solar-redis
+            - name: SPA_URL
+              value: http://solar-ui
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI
+              value: http://solar-keycloak/realms/SolarBookshop

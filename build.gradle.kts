@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
     testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-client-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
