@@ -11,7 +11,25 @@ defining rate limiters with [Spring Data Redis](https://spring.io/projects/sprin
 and using retries and timeouts with Spring WebFlux. It also stores web session state using 
 [Spring Session](https://spring.io/projects/spring-session) Data Redis, a NoSQL in-memory data store.
 
-![Kubernetes Cluster diagram](./kubernetes-cluster.svg)
+![Kubernetes Cluster diagram](diagram/kubernetes-cluster.svg)
+
+Access control systems allow users access to resources only when their identity has been proven and they have the required permissions.
+
+### Authentication
+Authentication is the process of proving that you are who you say you are. This is achieved by verification of the identity of a person or device. It's sometimes shortened to Authorization
+Authorization is the act of granting an authenticated party permission to do something. It specifies what data you're allowed to access and what you can do with that data. Authorization is sometimes shortened to AuthZ. AuthN.
+
+### Authorization
+Authorization is the act of granting an authenticated party permission to do something. It specifies what data you're allowed to access and what you can do with that data. Authorization is sometimes shortened to AuthZ.
+
+### Feature of edge-service
+- Authenticaton using a dedicated identity and access management solution, **Keycloak**. Makes use of **Spring Security** to secure applications and adopt standards like **JWT**, **OpenID Connect**, and **OAuth 2.0**.
+- Role based access control strategy (RBAC) is used to protect the REST endpoints exposed by Spring Boot, depending upon if the user is a *customer* or an *employee* of the bookshop.
+- It configures data auditing to keep tack of which user and what changes.
+- Enforces protection rules for data so that only its owner can access it.
+
+![OAuth2 Roles](./diagram/oauth2-roles.svg)
+>How the OIDC/OAuth2 roles are assigned to the entities in the Solar Bookshop architecture
 
 ## Useful Commands
 
