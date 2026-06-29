@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.client.oidc.web.server.logout.OidcClientInitiatedServerLogoutSuccessHandler;
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.client.web.server.WebSessionServerOAuth2AuthorizedClientRepository;
 import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.HttpStatusServerEntryPoint;
@@ -59,5 +61,14 @@ public class SecurityConfig {
       }));
       return chain.filter(exchange);
     };
+  }
+
+  @Bean
+  ServerOAuth2AuthorizedClientRepository authorizedClientRepository() {
+//    This implementation that stores Access Tokens in the web session. Spring Session will pick
+//    them up automatically and save them in Redis, just like it does with ID Tokens.
+//    The default implementation for this repository adopts an in-memory strategy
+//    for persistence, which makes edge-service stateful.
+    return new WebSessionServerOAuth2AuthorizedClientRepository();
   }
 }

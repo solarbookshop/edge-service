@@ -27,6 +27,9 @@ spring:
         webflux:
           default-filters:
             - SaveSession
+#             With TokenRelay enabled, Spring Cloud Gateway takes care of propagating the right Access Token
+#             as an Authorization header in all outgoing requests to downstream Service.
+            - TokenRelay
             - name: RequestRateLimiter
               args:
                 redis-rate-limiter:
@@ -91,7 +94,7 @@ spring:
           keycloak:
             client-id: edge-service
             client-secret: solar-keycloak-secret
-            scope: openid
+            scope: openid, roles
         provider:
             keycloak:
                 issuer-uri: http://localhost:8080/realms/SolarBookshop
