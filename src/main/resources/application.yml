@@ -114,7 +114,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health, prometheus
   endpoint:
     health:
       show-details: always
@@ -124,8 +124,13 @@ management:
       group:
         readiness:
           include: readinessState, redis
+  metrics:
+    tags:
+      application: ${spring.application.name}
 logging:
   group:
     circuitbreaker: io.github.resilience4j, org.springframework.cloud.circuitbreaker
   level:
-    io.github.resilience4j: DEBUG
+    circuitbreaker: info
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
