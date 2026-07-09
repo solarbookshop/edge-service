@@ -4,6 +4,7 @@ server:
     connection-timeout: 2s
     idle-timeout: 15s
   shutdown: graceful
+
 spring:
   application:
     name: edge-service
@@ -98,6 +99,7 @@ spring:
         provider:
             keycloak:
                 issuer-uri: http://localhost:8080/realms/SolarBookshop
+
 resilience4j:
   circuitbreaker:
     configs:
@@ -110,6 +112,7 @@ resilience4j:
     configs:
       default:
         timeoutDuration: 5s
+
 management:
   endpoints:
     web:
@@ -121,16 +124,20 @@ management:
       show-components: always
       probes:
         enabled: true
+      # Disable validation of group membership to prevent startup issues with the reactive Redis contributor in WebFlux
+      validate-group-membership: false
       group:
         readiness:
           include: readinessState, redis
   metrics:
     tags:
       application: ${spring.application.name}
+
 logging:
   group:
     circuitbreaker: io.github.resilience4j, org.springframework.cloud.circuitbreaker
   level:
     circuitbreaker: info
   pattern:
-    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+  include-application-name: false
