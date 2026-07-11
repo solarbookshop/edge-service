@@ -19,23 +19,23 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2025.1.0"
+extra["otelVersion"] = "2.29.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
   implementation("org.springframework.boot:spring-boot-starter-security-oauth2-client")
   implementation("org.springframework.boot:spring-boot-starter-session-data-redis")
-  implementation("org.springframework.boot:spring-boot-starter-opentelemetry")
   implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
   implementation("org.springframework.cloud:spring-cloud-starter-config")
   implementation("org.springframework.cloud:spring-cloud-starter-gateway-server-webflux")
   runtimeOnly("io.github.resilience4j:resilience4j-micrometer")
   runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+  runtimeOnly("io.opentelemetry.javaagent:opentelemetry-javaagent:${property("otelVersion")}")
   testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
   testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-client-test")
-  testImplementation("org.springframework.boot:spring-boot-starter-opentelemetry-test")
   testImplementation("org.springframework.boot:spring-boot-testcontainers")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.testcontainers:testcontainers-junit-jupiter")
