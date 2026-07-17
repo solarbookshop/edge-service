@@ -1,0 +1,9 @@
+spring:
+  data:
+    redis:
+      host: solar-redis
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://solar-keycloak/realms/SolarBookshop
